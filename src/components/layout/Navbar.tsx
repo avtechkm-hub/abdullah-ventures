@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Show, UserButton } from '@clerk/nextjs';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
+import { useSidebar } from '../../hooks/useSidebar';
 
 const homeLinks = [
   { label: 'About', href: '#about' },
@@ -77,9 +78,10 @@ const ClerkAuthControls = ({ mobile = false, onAction = () => {} }) => {
   );
 };
 
-const Navbar = ({ showSidebarToggle = false, onSidebarToggle, isHomeRoute = false }) => {
+const Navbar = ({ showSidebarToggle = false, isHomeRoute = false }) => {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
   const navRef = useRef(null);
+  const { openSidebar } = useSidebar();
 
   useEffect(() => {
     if (!isHomeRoute) {
@@ -122,7 +124,7 @@ const Navbar = ({ showSidebarToggle = false, onSidebarToggle, isHomeRoute = fals
       return;
     }
 
-    onSidebarToggle();
+    openSidebar();
   };
 
   return (
@@ -137,9 +139,9 @@ const Navbar = ({ showSidebarToggle = false, onSidebarToggle, isHomeRoute = fals
         {isHomeRoute ? (
           <>
             {homeLinks.map((item) => (
-              <a key={item.href} href={item.href} className="hover:text-blue-400 transition whitespace-nowrap">
+              <Link key={item.href} href={item.href} className="hover:text-blue-400 transition whitespace-nowrap">
                 {item.label}
-              </a>
+              </Link>
             ))}
             <ClerkAuthControls />
           </>
@@ -157,7 +159,8 @@ const Navbar = ({ showSidebarToggle = false, onSidebarToggle, isHomeRoute = fals
           type="button"
           onClick={handleMenuClick}
           className="lg:hidden inline-flex items-center gap-2 px-3 py-2 rounded-full bg-slate-800 text-white border border-blue-900"
-          aria-label="Open sidebar menu"
+          aria-label={isHomeRoute ? (isHomeMenuOpen ? 'Close mobile menu' : 'Open mobile menu') : 'Open portal sidebar'}
+          aria-expanded={isHomeRoute ? isHomeMenuOpen : undefined}
         >
           <Menu size={16} />
         </button>
@@ -165,17 +168,22 @@ const Navbar = ({ showSidebarToggle = false, onSidebarToggle, isHomeRoute = fals
       </div>
 
       {isHomeRoute && isHomeMenuOpen && (
-        <div className="absolute top-full left-4 right-4 mt-3 bg-slate-900 border border-blue-900 rounded-xl p-4 md:hidden shadow-2xl">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation menu"
+          className="absolute top-full left-4 right-4 mt-3 bg-slate-900 border border-blue-900 rounded-xl p-4 md:hidden shadow-2xl"
+        >
           <div className="flex flex-col gap-3 text-[11px] font-black uppercase tracking-[0.15em]">
             {homeLinks.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsHomeMenuOpen(false)}
                 className="text-slate-200 hover:text-blue-400"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <ClerkAuthControls mobile onAction={() => setIsHomeMenuOpen(false)} />
           </div>

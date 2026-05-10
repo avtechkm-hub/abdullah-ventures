@@ -1,6 +1,14 @@
 "use client";
 import { Search } from 'lucide-react';
 
+type ServiceRequestsTableProps = {
+  requests: any[];
+  searchTerm: string;
+  onSearchChange: (value: string) => void;
+  editable?: boolean;
+  onRequestClick?: (request: any) => void;
+};
+
 const statusStyles = {
   REQUESTED: 'bg-amber-100 text-amber-800 border-amber-200',
   IN_PROGRESS: 'bg-blue-100 text-blue-800 border-blue-200',
@@ -32,8 +40,8 @@ const ServiceRequestsTable = ({
   searchTerm,
   onSearchChange,
   editable = false,
-  onRequestClick = () => {},
-}) => (
+  onRequestClick,
+}: ServiceRequestsTableProps) => (
   <div className="bg-white rounded-3xl shadow-2xl border overflow-hidden">
     <div className="p-4 bg-slate-900 text-white font-bold text-[10px] uppercase tracking-widest italic flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center justify-between border-b border-blue-900">
       <span className="text-blue-400 font-black">Live Service Tracker</span>
@@ -71,7 +79,7 @@ const ServiceRequestsTable = ({
                 className={`border-b transition-all font-sans align-top ${
                   editable ? 'hover:bg-blue-50 cursor-pointer' : 'hover:bg-slate-50'
                 }`}
-                onClick={() => editable && onRequestClick(request)}
+                onClick={() => editable && onRequestClick?.(request)}
               >
                 <td className="p-6 text-blue-600 font-mono italic underline">SR-{shortId(request.id)}</td>
                 <td className="p-6 text-slate-600">
@@ -100,7 +108,7 @@ const ServiceRequestsTable = ({
             ))
           ) : (
             <tr>
-              <td colSpan="7" className="p-8 text-center text-slate-500 text-sm">
+              <td colSpan={7} className="p-8 text-center text-slate-500 text-sm">
                 No service requests match your search.
               </td>
             </tr>

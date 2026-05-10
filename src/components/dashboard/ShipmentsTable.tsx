@@ -45,7 +45,7 @@ const ShipmentsTable = ({ shipments, searchTerm, onSearchChange, tableLabel = 'D
           ))
         ) : (
           <tr>
-            <td colSpan="6" className="p-8 text-center text-slate-500 text-sm">
+            <td colSpan={6} className="p-8 text-center text-slate-500 text-sm">
               No shipments match your search.
             </td>
           </tr>

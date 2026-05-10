@@ -6,7 +6,7 @@ import SEO from '../../components/SEO';
 import DashboardSidebar from '../../components/dashboard/DashboardSidebar';
 import { tradeNodes } from '../../data/tradeData';
 
-const Nodes = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const Nodes = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredNodes = useMemo(() => {
@@ -27,7 +27,7 @@ const Nodes = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div className="min-h-screen bg-slate-100 lg:flex font-sans">
       <SEO title="Nodes | Abdullah Ventures" />
-      <DashboardSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <DashboardSidebar />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-12 text-slate-800">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 border-b-2 border-blue-600 pb-4">

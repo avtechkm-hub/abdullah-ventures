@@ -5,7 +5,7 @@ const FounderSection = () => (
     <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 sm:gap-12 lg:gap-16">
       <div className="w-52 h-52 sm:w-64 sm:h-64 bg-slate-800 rounded-2xl border-2 border-blue-500 overflow-hidden shadow-2xl relative rotate-2">
         <img
-          src={image}
+          src={image.src}
           alt="CEO Kazi Abdullah Al Mamun"
           className="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500"
         />

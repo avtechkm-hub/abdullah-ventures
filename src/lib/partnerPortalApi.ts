@@ -2,6 +2,11 @@ import { shipments as demoShipments } from '../data/tradeData';
 import { serviceCatalog } from '../data/serviceCatalog';
 import { hasSupabase, supabase } from './supabaseClient';
 
+const resolveCompanyName = (companies) =>
+  Array.isArray(companies)
+    ? companies[0]?.company_name || ''
+    : companies?.company_name || '';
+
 const demoCompany = {
   id: 'demo-company',
   companyName: 'Abdullah Ventures',
@@ -50,7 +55,7 @@ const mapServiceRequests = (requests = []) =>
   requests.map((request) => ({
     id: request.id,
     companyId: request.company_id || request.companyId || '',
-    companyName: request.companies?.company_name || request.companyName || '',
+    companyName: resolveCompanyName(request.companies) || request.companyName || '',
     requesterName: request.requester_name || request.requesterName || 'Not specified',
     requesterEmail: request.requester_email || request.requesterEmail || '',
     contactNumber: request.contact_number || request.contactNumber || '',
@@ -381,7 +386,7 @@ export const getAdminSnapshotForAccess = async (access) => {
       fullName: user.full_name,
       role: user.role,
       companyId: user.company_id || '',
-      companyName: user.companies?.company_name || '',
+      companyName: resolveCompanyName(user.companies) || '',
     })),
   };
 };

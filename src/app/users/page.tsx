@@ -27,7 +27,7 @@ const formatDate = (value) => {
 
 const phoneToWhatsApp = (value = '') => value.replace(/[^\d]/g, '');
 
-const Users = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const Users = () => {
   const { access, loading: loadingAccess } = usePortalAccess();
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -82,7 +82,7 @@ const Users = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div className="min-h-screen bg-slate-100 lg:flex font-sans">
       <SEO title="Users | Abdullah Ventures" />
-      <DashboardSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <DashboardSidebar />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-12 text-slate-800">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 sm:mb-12 border-b-2 border-blue-600 pb-4">
@@ -137,7 +137,7 @@ const Users = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   <tbody className="text-xs font-bold">
                     {isLoading ? (
                       <tr>
-                        <td colSpan="9" className="p-8 text-center text-slate-500 text-sm">
+                        <td colSpan={9} className="p-8 text-center text-slate-500 text-sm">
                           Loading users...
                         </td>
                       </tr>
@@ -191,7 +191,7 @@ const Users = ({ isSidebarOpen, setIsSidebarOpen }) => {
                       })
                     ) : (
                       <tr>
-                        <td colSpan="9" className="p-8 text-center text-slate-500 text-sm">
+                        <td colSpan={9} className="p-8 text-center text-slate-500 text-sm">
                           No users found.
                         </td>
                       </tr>

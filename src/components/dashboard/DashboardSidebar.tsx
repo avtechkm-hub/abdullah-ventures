@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { Activity, Archive, ClipboardList, Globe, Package, Users, X } from 'lucide-react';
 import { usePortalAccess } from '../../hooks/usePortalAccess';
 import { canManageCompany } from '../../lib/accessControl';
+import { useSidebar } from '../../hooks/useSidebar';
 
 const baseMenuItems = [
   { to: '/dashboard', label: 'Dashboard', icon: Activity, end: true },
@@ -12,8 +13,9 @@ const baseMenuItems = [
   { to: '/history', label: 'History', icon: Archive },
   { to: '/nodes', label: 'Nodes', icon: Globe },
 ];
-const DashboardSidebar = ({ isOpen = false, setIsOpen = () => {} }) => {
+const DashboardSidebar = () => {
   const { access } = usePortalAccess();
+  const { isSidebarOpen, closeSidebar } = useSidebar();
   const pathname = usePathname();
   const menuItems = canManageCompany(access)
     ? [...baseMenuItems, { to: '/users', label: 'Users', icon: Users }]
@@ -21,17 +23,17 @@ const DashboardSidebar = ({ isOpen = false, setIsOpen = () => {} }) => {
 
   return (
     <>
-      {isOpen && (
+      {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-slate-950/60 z-50 lg:hidden"
-          onClick={() => setIsOpen(false)}
+          onClick={closeSidebar}
           aria-hidden="true"
         ></div>
       )}
 
       <aside
         className={`fixed top-0 left-0 h-full w-72 bg-slate-900 p-6 text-white border-r border-blue-900 z-[60] transition-transform duration-300 lg:hidden ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex items-center justify-between mb-8">
@@ -40,7 +42,7 @@ const DashboardSidebar = ({ isOpen = false, setIsOpen = () => {} }) => {
           </div>
           <button
             type="button"
-            onClick={() => setIsOpen(false)}
+            onClick={closeSidebar}
             className="p-2 rounded border border-slate-700 text-slate-300"
             aria-label="Close sidebar menu"
           >
@@ -55,7 +57,7 @@ const DashboardSidebar = ({ isOpen = false, setIsOpen = () => {} }) => {
             <li key={`mobile-${to}`}>
               <Link
                 href={to}
-                onClick={() => setIsOpen(false)}
+                onClick={closeSidebar}
                 className={`flex items-center gap-3 transition px-3 py-2 rounded-lg border ${
                     isActive
                       ? 'text-blue-500 border-blue-500 bg-slate-800'

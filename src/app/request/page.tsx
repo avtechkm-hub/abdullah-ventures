@@ -7,7 +7,7 @@ import { serviceCatalog } from '../../data/serviceCatalog';
 import { usePortalAccess } from '../../hooks/usePortalAccess';
 import { createServiceRequest } from '../../lib/partnerPortalApi';
 
-const RequestService = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const RequestService = () => {
   const { access, loading: loadingAccess } = usePortalAccess();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -44,7 +44,7 @@ const RequestService = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div className="min-h-screen bg-slate-100 lg:flex font-sans">
       <SEO title="Request Service | Abdullah Ventures" />
-      <DashboardSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <DashboardSidebar />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-12 text-slate-800">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 sm:mb-12 border-b-2 border-blue-600 pb-4">

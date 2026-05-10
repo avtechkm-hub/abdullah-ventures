@@ -9,7 +9,7 @@ import { canManageCompany } from '../../lib/accessControl';
 import { getServiceRequestsForAccess, updateServiceRequestProgress } from '../../lib/partnerPortalApi';
 import ServiceRequestsTable from '../../components/dashboard/ServiceRequestsTable';
 
-const Tracking = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const Tracking = () => {
   const { access, loading: loadingAccess } = usePortalAccess();
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoadingRequests, setIsLoadingRequests] = useState(true);
@@ -133,7 +133,7 @@ const Tracking = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div className="min-h-screen bg-slate-100 lg:flex font-sans">
       <SEO title="Tracking | Abdullah Ventures" />
-      <DashboardSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <DashboardSidebar />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-12 text-slate-800">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 sm:mb-12 border-b-2 border-blue-600 pb-4">
@@ -213,7 +213,7 @@ const Tracking = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   min={0}
                   max={100}
                   value={selectedProgressPercent}
-                  onChange={(event) => setSelectedProgressPercent(event.target.value)}
+                  onChange={(event) => setSelectedProgressPercent(Number(event.target.value))}
                   className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-bold focus:outline-none focus:border-blue-600"
                 />
                 {selectedStatus === 'COMPLETED' && (

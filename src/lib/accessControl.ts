@@ -10,6 +10,11 @@ const defaultAccess = {
   email: demoEmail,
 };
 
+const resolveCompanyName = (companies) =>
+  Array.isArray(companies)
+    ? companies[0]?.company_name || ''
+    : companies?.company_name || '';
+
 export const getUserAccess = async (email) => {
   if (!email) {
     return null;
@@ -40,7 +45,7 @@ export const getUserAccess = async (email) => {
   return {
     role: data.role,
     companyId: data.company_id || '',
-    companyName: data.companies?.company_name || '',
+    companyName: resolveCompanyName(data.companies),
     email: data.email,
   };
 };

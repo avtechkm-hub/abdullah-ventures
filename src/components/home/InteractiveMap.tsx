@@ -69,7 +69,7 @@ const InteractiveMap = () => {
         {/* We use aspect-[16/10] to strictly lock the container to the image's geometry. */}
         <div className="relative aspect-[16/10] max-w-6xl mx-auto rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-4 sm:border-8 border-slate-900 bg-slate-900">
           <img
-            src={WorldMapPNG}
+            src={WorldMapPNG.src}
             alt="World Trade Map"
             className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity"
           />

@@ -7,7 +7,7 @@ import { usePortalAccess } from '../../hooks/usePortalAccess';
 import { getServiceRequestsForAccess } from '../../lib/partnerPortalApi';
 import ServiceRequestsTable from '../../components/dashboard/ServiceRequestsTable';
 
-const History = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const History = () => {
   const { access, loading: loadingAccess } = usePortalAccess();
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoadingRequests, setIsLoadingRequests] = useState(true);
@@ -57,7 +57,7 @@ const History = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <div className="min-h-screen bg-slate-100 lg:flex font-sans">
       <SEO title="History | Abdullah Ventures" />
-      <DashboardSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <DashboardSidebar />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-12 text-slate-800">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 sm:mb-12 border-b-2 border-blue-600 pb-4">

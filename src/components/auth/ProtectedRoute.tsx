@@ -1,6 +1,9 @@
-import { useAuth } from "@clerk/nextjs";
-import { Navigate, useLocation } from "react-router-dom";
-import { usePortalAccess } from "../../hooks/usePortalAccess";
+"use client";
+import type { ReactNode } from 'react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
+import { usePortalAccess } from '../../hooks/usePortalAccess';
 
 const hasClerk = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
@@ -15,25 +18,47 @@ const loadingScreen = (
   </div>
 );
 
-const ClerkProtectedRoute = ({ children, requireAdmin = false, skipProfileCheck = false }) => {
+const ClerkProtectedRoute = ({
+  children,
+  requireAdmin = false,
+  skipProfileCheck = false,
+}: {
+  children: ReactNode;
+  requireAdmin?: boolean;
+  skipProfileCheck?: boolean;
+}) => {
+  const router = useRouter();
   const { isLoaded, userId } = useAuth();
-  const location = useLocation();
   const { access, profileCompleted, loading } = usePortalAccess();
 
-  if (!isLoaded || loading) {
+  useEffect(() => {
+    if (!isLoaded || loading) {
+      return;
+    }
+
+    if (!userId) {
+      router.replace('/login');
+      return;
+    }
+
+    if (!skipProfileCheck && !profileCompleted) {
+      router.replace('/onboarding');
+      return;
+    }
+
+    if (requireAdmin && !['admin', 'super_admin'].includes(access?.role || '')) {
+      router.replace('/dashboard');
+    }
+  }, [isLoaded, loading, userId, profileCompleted, access, requireAdmin, skipProfileCheck, router]);
+
+  if (
+    !isLoaded ||
+    loading ||
+    !userId ||
+    (!skipProfileCheck && !profileCompleted) ||
+    (requireAdmin && !['admin', 'super_admin'].includes(access?.role || ''))
+  ) {
     return loadingScreen;
-  }
-
-  if (!userId) {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
-  }
-
-  if (!skipProfileCheck && !profileCompleted) {
-    return <Navigate to="/onboarding" replace />;
-  }
-
-  if (requireAdmin && !["admin", "super_admin"].includes(access?.role || "")) {
-    return <Navigate to="/dashboard" replace />;
   }
 
   return children;

@@ -21,7 +21,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "echo \"No lint configured. Install ESLint and add a lint config if needed.\""
   },
   "browserslist": {
     "production": [
