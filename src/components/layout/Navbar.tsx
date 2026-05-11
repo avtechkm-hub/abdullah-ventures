@@ -102,7 +102,7 @@ const Navbar = ({ showSidebarToggle = false, isHomeRoute = false }) => {
 
     const handleScroll = () => setIsHomeMenuOpen(false);
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsHomeMenuOpen(false);
       }
     };
@@ -135,7 +135,7 @@ const Navbar = ({ showSidebarToggle = false, isHomeRoute = false }) => {
         ABDULLAH VENTURES
       </Link>
       <div className="ml-auto flex items-center gap-2 sm:gap-4 md:gap-8">
-      <div className="hidden md:flex font-semibold text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] items-center gap-2 sm:gap-4 md:gap-8">
+      <div className="hidden lg:flex font-semibold text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] items-center gap-2 sm:gap-4 md:gap-8">
         {isHomeRoute ? (
           <>
             {homeLinks.map((item) => (
@@ -172,7 +172,7 @@ const Navbar = ({ showSidebarToggle = false, isHomeRoute = false }) => {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation menu"
-          className="absolute top-full left-4 right-4 mt-3 bg-slate-900 border border-blue-900 rounded-xl p-4 md:hidden shadow-2xl"
+          className="absolute top-full left-4 right-4 mt-3 bg-slate-900 border border-blue-900 rounded-xl p-4 lg:hidden shadow-2xl"
         >
           <div className="flex flex-col gap-3 text-[11px] font-black uppercase tracking-[0.15em]">
             {homeLinks.map((item) => (
