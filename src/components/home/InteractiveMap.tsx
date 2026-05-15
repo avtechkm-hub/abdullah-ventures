@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Target, Search, Clock, ShieldCheck, Zap } from 'lucide-react';
 import WorldMapPNG from '../../assets/world-map.png';
 
@@ -48,8 +48,23 @@ const hubData = [
 
 const InteractiveMap = () => {
   const [activeHubId, setActiveHubId] = useState('bd'); // Default to HQ
+  const [tooltipVisible, setTooltipVisible] = useState(true);
+  const timeoutRef = useRef(null);
 
   const activeHub = hubData.find((hub) => hub.id === activeHubId);
+
+  const handleMouseEnter = (hubId) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setActiveHubId(hubId);
+      setTooltipVisible(true);
+    }, 200); // 200ms delay to prevent flashing
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setTooltipVisible(false);
+  };
 
   return (
     <section className="py-14 sm:py-20 lg:py-24 bg-slate-50 px-4 sm:px-6 lg:px-10 font-sans">
@@ -86,7 +101,8 @@ const InteractiveMap = () => {
                 <button
                   key={hub.id}
                   onClick={() => setActiveHubId(hub.id)}
-                  onMouseEnter={() => setActiveHubId(hub.id)}
+                  onMouseEnter={() => handleMouseEnter(hub.id)}
+                  onMouseLeave={handleMouseLeave}
                   className={`absolute group flex items-center justify-center rounded-full transition-all duration-300 ${
                     isActive
                       ? 'w-10 h-10 bg-blue-600 scale-110 z-30'
@@ -111,7 +127,7 @@ const InteractiveMap = () => {
             })}
 
             {/* Premium Glassmorphism Tooltip (Desktop Only): RESTORING PREVIOUS DESIGN with COORDINATE FIX */}
-            {activeHub && (
+            {activeHub && tooltipVisible && (
               <div
                 className="absolute z-40 hidden md:flex w-[320px] bg-slate-900/90 backdrop-blur-xl p-6 rounded-2xl border border-blue-500/30 shadow-[20px_20px_60px_rgba(0,0,0,0.5)] items-start gap-5 transition-all duration-500 animate-fadeIn"
                 style={{
@@ -144,7 +160,7 @@ const InteractiveMap = () => {
             )}
 
             {/* Mobile Info Card (Stays fixed at bottom for usability) */}
-            {activeHub && (
+            {activeHub && tooltipVisible && (
               <div className="absolute bottom-3 left-3 right-3 z-40 md:hidden bg-slate-900 p-4 rounded-xl border border-blue-500/30 flex items-center gap-3 shadow-xl">
                 <div className="bg-blue-600 p-3 rounded-xl text-white">
                   <activeHub.icon size={16} />
