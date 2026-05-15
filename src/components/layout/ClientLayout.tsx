@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import { SidebarProvider } from '../../hooks/useSidebar';
+import ErrorBoundary from '../ErrorBoundary';
+import FontLoader from '../FontLoader';
 
 export default function ClientLayout({ children }) {
   const pathname = usePathname() || '';
@@ -16,10 +18,13 @@ export default function ClientLayout({ children }) {
 
   return (
     <SidebarProvider>
+      <FontLoader />
       {!isAuthRoute && (
         <Navbar isHomeRoute={isHomeRoute} showSidebarToggle={isPortalRoute} />
       )}
-      {children}
+      <ErrorBoundary>
+        {children}
+      </ErrorBoundary>
       {showFooter && <Footer />}
       {!isAuthRoute && <WhatsAppButton />}
     </SidebarProvider>
