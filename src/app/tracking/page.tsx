@@ -210,6 +210,7 @@ const Tracking = () => {
                 </label>
                 <input
                   type="number"
+                  aria-label="Progress percentage"
                   min={0}
                   max={100}
                   value={selectedProgressPercent}
@@ -224,6 +225,7 @@ const Tracking = () => {
                   Admin Note
                 </label>
                 <textarea
+                  aria-label="Admin Note"
                   value={selectedAdminNote}
                   onChange={(event) => setSelectedAdminNote(event.target.value)}
                   rows={4}

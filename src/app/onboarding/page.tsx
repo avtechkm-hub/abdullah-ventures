@@ -84,6 +84,7 @@ const Onboarding = () => {
                   </label>
                   <input
                     type="text"
+                    aria-label="Full Name"
                     value={profileForm.fullName}
                     onChange={(e) => setProfileForm({ ...profileForm, fullName: e.target.value })}
                     className="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-blue-600"
@@ -99,6 +100,7 @@ const Onboarding = () => {
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                     <input
                       type="tel"
+                      aria-label="Contact Number"
                       value={profileForm.contactNumber}
                       onChange={(e) => setProfileForm({ ...profileForm, contactNumber: e.target.value })}
                       className="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 pl-10 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-blue-600"
@@ -117,6 +119,7 @@ const Onboarding = () => {
                   <Building className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                   <input
                     type="text"
+                    aria-label="Company Name"
                     value={profileForm.companyName}
                     onChange={(e) => setProfileForm({ ...profileForm, companyName: e.target.value })}
                     className="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 pl-10 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-blue-600"
@@ -134,6 +137,7 @@ const Onboarding = () => {
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                   <input
                     type="text"
+                    aria-label="Address Line"
                     value={profileForm.addressLine}
                     onChange={(e) => setProfileForm({ ...profileForm, addressLine: e.target.value })}
                     className="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 pl-10 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-blue-600"
@@ -150,6 +154,7 @@ const Onboarding = () => {
                   </label>
                   <input
                     type="text"
+                    aria-label="City"
                     value={profileForm.city}
                     onChange={(e) => setProfileForm({ ...profileForm, city: e.target.value })}
                     className="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-blue-600"
@@ -163,6 +168,7 @@ const Onboarding = () => {
                   </label>
                   <input
                     type="text"
+                    aria-label="Country"
                     value={profileForm.country}
                     onChange={(e) => setProfileForm({ ...profileForm, country: e.target.value })}
                     className="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-blue-600"
@@ -178,6 +184,7 @@ const Onboarding = () => {
                 </label>
                 <input
                   type="email"
+                  aria-label="Email Address"
                   value={profileForm.email}
                   disabled
                   className="w-full rounded-xl border-slate-200 bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500 cursor-not-allowed"
@@ -188,6 +195,7 @@ const Onboarding = () => {
               <div className="pt-4">
                 <button
                   type="submit"
+                  aria-label="Complete Setup and Continue"
                   disabled={isSaving}
                   className="w-full rounded-xl bg-blue-600 px-8 py-4 font-black italic uppercase tracking-widest text-white shadow-xl shadow-blue-600/20 hover:bg-slate-900 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                 >

@@ -46,9 +46,11 @@ const ServiceRequestsTable = ({
     <div className="p-4 bg-slate-900 text-white font-bold text-[10px] uppercase tracking-widest italic flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center justify-between border-b border-blue-900">
       <span className="text-blue-400 font-black">Live Service Tracker</span>
       <label className="relative normal-case tracking-normal">
+        <span className="sr-only">Search</span>
         <Search size={14} className="text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
         <input
           type="text"
+          aria-label="Search Requests"
           value={searchTerm}
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="Search ID, user, service, status"

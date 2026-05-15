@@ -104,6 +104,7 @@ const Users = () => {
             <div className="mb-6">
               <input
                 type="text"
+                aria-label="Search users"
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder="Search name, email, company, phone"

@@ -50,6 +50,7 @@ const ContactSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
              <input 
                type="text" 
+               aria-label="Full Name"
                value={formData.name}
                onChange={(e) => setFormData({...formData, name: e.target.value})}
                placeholder="FULL NAME" 
@@ -58,6 +59,7 @@ const ContactSection = () => {
              />
              <input 
                type="email" 
+               aria-label="Email Address"
                value={formData.email}
                onChange={(e) => setFormData({...formData, email: e.target.value})}
                placeholder="EMAIL ADDRESS" 
@@ -66,13 +68,14 @@ const ContactSection = () => {
              />
            </div>
            <textarea 
+             aria-label="Message"
              value={formData.message}
              onChange={(e) => setFormData({...formData, message: e.target.value})}
              placeholder="DESCRIBE YOUR TRADE OR COMMODITY REQUIREMENTS" 
              required
              className="w-full border-b-2 border-slate-200 py-3 text-[10px] font-bold outline-none focus:border-blue-600 transition uppercase tracking-widest h-32" 
            />
-           <button type="submit" className="w-full bg-blue-600 text-white font-black py-4 uppercase text-[10px] tracking-[0.3em] hover:bg-slate-900 transition">
+           <button type="submit" aria-label="Broadcast Inquiry" className="w-full bg-blue-600 text-white font-black py-4 uppercase text-[10px] tracking-[0.3em] hover:bg-slate-900 transition">
              Broadcast Inquiry
            </button>
         </form>

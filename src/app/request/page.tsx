@@ -75,6 +75,7 @@ const RequestService = () => {
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
               name="requesterName"
+              aria-label="Your name"
               value={form.requesterName}
               onChange={(event) => setForm((current) => ({ ...current, requesterName: event.target.value }))}
               placeholder="Your name"
@@ -84,6 +85,7 @@ const RequestService = () => {
 
             <select
               name="serviceName"
+              aria-label="Service Name"
               value={form.serviceName}
               onChange={(event) => setForm((current) => ({ ...current, serviceName: event.target.value }))}
               className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-bold focus:outline-none focus:border-blue-600"
@@ -98,6 +100,7 @@ const RequestService = () => {
 
             <textarea
               name="details"
+              aria-label="Request details"
               value={form.details}
               onChange={(event) => setForm((current) => ({ ...current, details: event.target.value }))}
               placeholder="Briefly describe your requirement, timeline, and location."
@@ -107,6 +110,7 @@ const RequestService = () => {
 
             <button
               type="submit"
+              aria-label="Submit Service Request"
               disabled={isSubmitting || loadingAccess}
               className="w-full rounded-xl bg-blue-600 px-4 py-3 text-white text-[11px] font-black uppercase tracking-[0.2em] hover:bg-slate-900 disabled:opacity-60"
             >

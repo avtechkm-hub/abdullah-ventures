@@ -36,6 +36,7 @@ const Nodes = () => {
             <Search size={14} className="text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
+              aria-label="Search node, type, status"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="Search node, type, status"
